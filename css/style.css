@@ -1,0 +1,114 @@
+*{
+    font-family: 'Fredericka the Great', cursive;
+    margin: auto 0;
+}
+.main-table{
+    background-image: url("../img/Wood-Backgrounds-Gallery-55-Plus-PIC-WPW5012643.jpg");
+    background-size: contain;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.table{
+    color: aliceblue;
+    font-size: 20px;
+    width: 90vw;
+    height: 400px;
+}
+.table td {
+    border-radius: 10%;
+    width: 180px;
+    height: 80px;
+    background-color: aliceblue;
+    opacity: 0.7;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    resize: none;
+}
+
+.table span{
+    color: rgba(100,344,200,0.7);
+}
+#calendar-head{
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 45px;
+}
+#calendar-img{
+    height: 80%;
+    width: 100%;
+    transition: 1s;
+}
+.animImage{
+    height: 200px;
+    width: 350px;
+    perspective: 300px;
+}
+.animImage:hover > #calendar-img{
+    transform: rotateY(180deg);
+}
+
+.table::before{
+    content: "PICK ME TO SAVE!";
+    width: 200px;
+    height: 40px;
+    display: block;
+    margin-bottom: -10px;
+}
+.animImage::after{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 5%;
+    border-width: 15px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+    opacity: 0.7;
+    animation: pulse 1s infinite;
+}
+@keyframes pulse {
+    0% { opacity: 1}
+    100% { opacity: 0}
+}
+.subTable{
+    width: 96vw;
+    margin-top: 10px;
+}
+.subTable td{
+    border-radius: 10%;
+    width: 180px;
+    height: 25px;
+    background-color: aliceblue;
+    color: black;
+    font-size: 15px;
+    resize: none;
+    border: 2px solid saddlebrown;
+}
+.subTable th{
+    width: 360px;
+    color: aliceblue;
+    font-size: 20px;
+}
+.dynamic_div{
+    height: 90px;
+    width: 150px;
+    display: flex;
+}
+.dynamic_div input, select, option{
+    font-size: 14px;
+    font-weight: bold;
+    width: 97%;
+}
+.dynamic_div button{
+    width: 50px;
+    height: 40px;
+    background-color: darkseagreen;
+    box-shadow: 2px 2px 1px darkolivegreen;
+    position: relative;
+    margin-left: 30px;
+    margin-top: 5px;
+    border-radius: 20%;
+}
+
