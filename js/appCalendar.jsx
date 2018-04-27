@@ -104,11 +104,39 @@ console.log(food);
                 data: newData,
             })
         };
-        render(){
+
+        handleClick = (e) =>{
+
+            // const meal = {Monday: this.state.};
+
             console.log(this.state.data);
+
+            // fetch('http://localhost:3000/meals', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Accept': 'application/json',
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(user),
+            // }).then(resp => {
+            //     if (resp.ok) {
+            //         return resp.json()
+            //     }else{
+            //         throw new Error('Error!');
+            //     }
+            // }).then(data => {
+            //     this.setState({
+            //         login: true,
+            //         user: user,
+            //     })
+            // }).catch(err => console.log('Error!!'))
+        };
+
+        render(){
+            console.log(this.state.data, "co to kurła!!");
             return <table className="table">
                 <tr>
-                    <th className="animImage" rowSpan="2"><img id="calendar-img" src="img/Romans14-law-of-clean-and-unclean-meats.jpg"/></th>
+                    <th onClick={this.handleClick} className="animImage" rowSpan="2"><img id="calendar-img" src="img/Romans14-law-of-clean-and-unclean-meats.jpg"/></th>
                     <th id="calendar-head" colSpan="5">Weekly <span>meal</span> calendar</th>
                     <th><Clock/></th>
                 </tr>
@@ -124,9 +152,9 @@ console.log(food);
                 <tr>
                     <th>breakfast</th>
                     <td><CalendarCell item={food} addFood={this.addFood} name="mon-br" foods={this.state.data}/>{this.state.item}</td>
-                    <td><CalendarCell item={food}/>{this.state.item}</td>
-                    <td><CalendarCell item={food}/>{this.state.item}</td>
-                    <td><CalendarCell item={food}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="tue-br" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="wed-br" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="thu-br" foods={this.state.data}/>{this.state.item}</td>
                     <td><CalendarCell item={food}/>{this.state.item}</td>
                     <td><CalendarCell item={food}/>{this.state.item}</td>
                     <td><CalendarCell item={food}/>{this.state.item}</td>
@@ -134,9 +162,9 @@ console.log(food);
                 <tr>
                     <th>lunch</th>
                     <td><CalendarCell item={food} addFood={this.addFood} name="mon-lu" foods={this.state.data}/>{this.state.item}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="tue-lu" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="wed-lu" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="thu-lu" foods={this.state.data}/>{this.state.item}</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -144,9 +172,9 @@ console.log(food);
                 <tr>
                     <th>dinner</th>
                     <td><CalendarCell item={food} addFood={this.addFood} name="mon-din" foods={this.state.data}/>{this.state.item}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="tue-din" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="wed-din" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="thu-din" foods={this.state.data}/>{this.state.item}</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -154,9 +182,9 @@ console.log(food);
                 <tr>
                     <th>snacks</th>
                     <td><CalendarCell item={food} addFood={this.addFood} name="mon-sna" foods={this.state.data}/>{this.state.item}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="tue-sna" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="wed-sna" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="thu-sna" foods={this.state.data}/>{this.state.item}</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -174,63 +202,100 @@ console.log(food);
             let mon_din =0;
             let mon_sna =0;
 
-            console.log(this.props.foods["mon-lu"], "wybrany produkt");
+            let tue_br =0;
+            let tue_lu =0;
+            let tue_din =0;
+            let tue_sna =0;
 
-            if(this.props.foods["mon-br"]) {
-                this.props.foods["mon-br"].forEach(el => {
-                    this.props.item.forEach(i => {
-                        if (el.name === i.name) {
-                            mon_br += (el.grams/100) * i.kcal;
-                            console.log(mon_br);
-                        }if(isNaN(el.grams)){
-                            mon_br = 0;
-                        }
-                    });
-                });
-            }
-            if(this.props.foods["mon-lu"]) {
-                this.props.foods["mon-lu"].forEach(el => {
-                    this.props.item.forEach(i => {
-                        if (el.name === i.name){
-                            mon_lu += (el.grams/100) * i.kcal;
-                            console.log(mon_lu);
-                        }if(isNaN(el.grams)){
-                            mon_lu = 0;
-                        }
+            let wed_br =0;
+            let wed_lu =0;
+            let wed_din =0;
+            let wed_sna =0;
+
+            let thu_br =0;
+            let thu_lu =0;
+            let thu_din =0;
+            let thu_sna =0;
+
+            // if(this.props.foods["mon-br"]) {
+            //     this.props.foods["mon-br"].forEach(el => {
+            //         this.props.item.forEach(i => {
+            //             if (el.name === i.name) {
+            //                 mon_br += (el.grams/100) * i.kcal;
+            //                 console.log(mon_br);
+            //             }if(isNaN(el.grams)){
+            //                 mon_br = 0;
+            //             }
+            //         });
+            //     });
+            // }
+            // if(this.props.foods["mon-lu"]) {
+            //     this.props.foods["mon-lu"].forEach(el => {
+            //         this.props.item.forEach(i => {
+            //             if (el.name === i.name){
+            //                 mon_lu += (el.grams/100) * i.kcal;
+            //                 console.log(mon_lu);
+            //             }if(isNaN(el.grams)){
+            //                 mon_lu = 0;
+            //             }
+            //         })
+            //     })
+            // }
+            // if(this.props.foods["mon-din"]){
+            //     this.props.foods["mon-din"].forEach(el => {
+            //         this.props.item.forEach(i => {
+            //             if (el.name === i.name){
+            //                 mon_din += (el.grams/100) * i.kcal;
+            //             }if(isNaN(el.grams)){
+            //                 mon_din = 0;
+            //             }
+            //         })
+            //     })
+            // }
+            // if(this.props.foods["mon-sna"]){
+            //     this.props.foods["mon-sna"].forEach(el => {
+            //         this.props.item.forEach(i => {
+            //             if (el.name === i.name){
+            //                 mon_sna += (el.grams/100) * i.kcal;
+            //             }if(isNaN(el.grams)){
+            //                 mon_sna = 0;
+            //             }
+            //         })
+            //     })
+            // }
+            /////////////////////////////////////////////
+            const kcalCalc = (data, variable) => {
+                    if (this.props.foods[data]) {
+                        this.props.foods[data].forEach(el => {
+                        this.props.item.forEach(i => {
+                            if (el.name === i.name) {
+                                variable += (el.grams / 100) * i.kcal;
+                            }if (isNaN(el.grams)) {
+                                variable = 0;
+                                console.log(variable);
+                            }
+                        });
                     })
-                })
-            }
-            if(this.props.foods["mon-din"]){
-                this.props.foods["mon-din"].forEach(el => {
-                    this.props.item.forEach(i => {
-                        if (el.name === i.name){
-                            mon_din += (el.grams/100) * i.kcal;
-                        }if(isNaN(el.grams)){
-                            mon_din = 0;
-                        }
-                    })
-                })
-            }
-            if(this.props.foods["mon-sna"]){
-                this.props.foods["mon-sna"].forEach(el => {
-                    this.props.item.forEach(i => {
-                        if (el.name === i.name){
-                            mon_sna += (el.grams/100) * i.kcal;
-                        }if(isNaN(el.grams)){
-                            mon_sna = 0;
-                        }
-                    })
-                })
-            }
-            let sumKcal = (Number(mon_lu) + Number(mon_br) + Number(mon_din) + Number(mon_sna)).toFixed(2);
+                }
+                return variable;
+            };
+
+            const sumKcalMon = (Number(kcalCalc("mon-br", mon_br)) + Number(kcalCalc("mon-lu", mon_lu)) + Number(kcalCalc("mon-din", mon_din)) + Number(kcalCalc("mon-sna", mon_sna))).toFixed(2);
+
+            const sumKcalTue = (Number(kcalCalc("tue-br", tue_br)) + Number(kcalCalc("tue-lu", tue_lu)) + Number(kcalCalc("tue-din", tue_din)) + Number(kcalCalc("tue-sna", tue_sna))).toFixed(2);
+
+            const sumKcalWed = (Number(kcalCalc("wed-br", wed_br)) + Number(kcalCalc("wed-lu", wed_lu)) + Number(kcalCalc("wed-din", wed_din)) + Number(kcalCalc("wed-sna", wed_sna))).toFixed(2);
+
+            const sumKcalThu = (Number(kcalCalc("wed-br", wed_br)) + Number(kcalCalc("wed-lu", wed_lu)) + Number(kcalCalc("wed-din", wed_din)) + Number(kcalCalc("wed-sna", wed_sna))).toFixed(2);
+            console.log(this.props.foods["mon-lu"], "wybrany produkt");
 
             return <tfoot className="subTable">
                 <tr>
                     <th>approx. kcal intake</th>
-                    <td>{sumKcal} kcal</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{sumKcalMon} kcal</td>
+                    <td>{sumKcalTue} kcal</td>
+                    <td>{sumKcalWed} kcal</td>
+                    <td>{sumKcalThu} kcal</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -238,7 +303,6 @@ console.log(food);
             </tfoot>
         }
     }
-
 
     class AppCalendar extends React.Component{
         // state={
