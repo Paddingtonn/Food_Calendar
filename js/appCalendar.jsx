@@ -107,7 +107,7 @@ console.log(food);
 
         handleClick = (e) =>{
 
-            // const meal = {Monday: this.state.};
+            //const meal = {Monday: this.state.};
 
             console.log(this.state.data);
 
@@ -133,8 +133,9 @@ console.log(food);
         };
 
         render(){
-            console.log(this.state.data, "co to kurła!!");
+            console.log(this.state.data, "co to?!!");
             return <table className="table">
+                <tbody>
                 <tr>
                     <th onClick={this.handleClick} className="animImage" rowSpan="2"><img id="calendar-img" src="img/Romans14-law-of-clean-and-unclean-meats.jpg"/></th>
                     <th id="calendar-head" colSpan="5">Weekly <span>meal</span> calendar</th>
@@ -155,9 +156,9 @@ console.log(food);
                     <td><CalendarCell item={food} addFood={this.addFood} name="tue-br" foods={this.state.data}/>{this.state.item}</td>
                     <td><CalendarCell item={food} addFood={this.addFood} name="wed-br" foods={this.state.data}/>{this.state.item}</td>
                     <td><CalendarCell item={food} addFood={this.addFood} name="thu-br" foods={this.state.data}/>{this.state.item}</td>
-                    <td><CalendarCell item={food}/>{this.state.item}</td>
-                    <td><CalendarCell item={food}/>{this.state.item}</td>
-                    <td><CalendarCell item={food}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="fri-br" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="sat-br" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="sun-br" foods={this.state.data}/>{this.state.item}</td>
                 </tr>
                 <tr>
                     <th>lunch</th>
@@ -165,9 +166,9 @@ console.log(food);
                     <td><CalendarCell item={food} addFood={this.addFood} name="tue-lu" foods={this.state.data}/>{this.state.item}</td>
                     <td><CalendarCell item={food} addFood={this.addFood} name="wed-lu" foods={this.state.data}/>{this.state.item}</td>
                     <td><CalendarCell item={food} addFood={this.addFood} name="thu-lu" foods={this.state.data}/>{this.state.item}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="fri-lu" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="sat-lu" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="sun-lu" foods={this.state.data}/>{this.state.item}</td>
                 </tr>
                 <tr>
                     <th>dinner</th>
@@ -175,9 +176,9 @@ console.log(food);
                     <td><CalendarCell item={food} addFood={this.addFood} name="tue-din" foods={this.state.data}/>{this.state.item}</td>
                     <td><CalendarCell item={food} addFood={this.addFood} name="wed-din" foods={this.state.data}/>{this.state.item}</td>
                     <td><CalendarCell item={food} addFood={this.addFood} name="thu-din" foods={this.state.data}/>{this.state.item}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="fri-din" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="sat-din" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="sun-din" foods={this.state.data}/>{this.state.item}</td>
                 </tr>
                 <tr>
                     <th>snacks</th>
@@ -185,11 +186,12 @@ console.log(food);
                     <td><CalendarCell item={food} addFood={this.addFood} name="tue-sna" foods={this.state.data}/>{this.state.item}</td>
                     <td><CalendarCell item={food} addFood={this.addFood} name="wed-sna" foods={this.state.data}/>{this.state.item}</td>
                     <td><CalendarCell item={food} addFood={this.addFood} name="thu-sna" foods={this.state.data}/>{this.state.item}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="fri-sna" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="sat-sna" foods={this.state.data}/>{this.state.item}</td>
+                    <td><CalendarCell item={food} addFood={this.addFood} name="sun-sna" foods={this.state.data}/>{this.state.item}</td>
                 </tr>
                 <tr><th colSpan="8"></th></tr>
+                </tbody>
                 <SubTable item={food} foods={this.state.data}/>
             </table>
         }
@@ -216,6 +218,21 @@ console.log(food);
             let thu_lu =0;
             let thu_din =0;
             let thu_sna =0;
+
+            let fri_br =0;
+            let fri_lu =0;
+            let fri_din =0;
+            let fri_sna =0;
+
+            let sat_br =0;
+            let sat_lu =0;
+            let sat_din =0;
+            let sat_sna =0;
+
+            let sun_br =0;
+            let sun_lu =0;
+            let sun_din =0;
+            let sun_sna =0;
 
             // if(this.props.foods["mon-br"]) {
             //     this.props.foods["mon-br"].forEach(el => {
@@ -286,8 +303,13 @@ console.log(food);
 
             const sumKcalWed = (Number(kcalCalc("wed-br", wed_br)) + Number(kcalCalc("wed-lu", wed_lu)) + Number(kcalCalc("wed-din", wed_din)) + Number(kcalCalc("wed-sna", wed_sna))).toFixed(2);
 
-            const sumKcalThu = (Number(kcalCalc("wed-br", wed_br)) + Number(kcalCalc("wed-lu", wed_lu)) + Number(kcalCalc("wed-din", wed_din)) + Number(kcalCalc("wed-sna", wed_sna))).toFixed(2);
-            console.log(this.props.foods["mon-lu"], "wybrany produkt");
+            const sumKcalThu = (Number(kcalCalc("thu-br", thu_br)) + Number(kcalCalc("thu-lu", thu_lu)) + Number(kcalCalc("thu-din", thu_din)) + Number(kcalCalc("thu-sna", thu_sna))).toFixed(2);
+
+            const sumKcalFri = (Number(kcalCalc("fri-br", fri_br)) + Number(kcalCalc("fri-lu", fri_lu)) + Number(kcalCalc("fri-din", fri_din)) + Number(kcalCalc("fri-sna", fri_sna))).toFixed(2);
+
+            const sumKcalSat = (Number(kcalCalc("sat-br", sat_br)) + Number(kcalCalc("sat-lu", sat_lu)) + Number(kcalCalc("sat-din", sat_din)) + Number(kcalCalc("sat-sna", sat_sna))).toFixed(2);
+
+            const sumKcalSun = (Number(kcalCalc("sun-br", sun_br)) + Number(kcalCalc("sun-lu", sun_lu)) + Number(kcalCalc("sun-din", sun_din)) + Number(kcalCalc("sun-sna", sun_sna))).toFixed(2);
 
             return <tfoot className="subTable">
                 <tr>
@@ -296,9 +318,9 @@ console.log(food);
                     <td>{sumKcalTue} kcal</td>
                     <td>{sumKcalWed} kcal</td>
                     <td>{sumKcalThu} kcal</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{sumKcalFri} kcal</td>
+                    <td>{sumKcalSat} kcal</td>
+                    <td>{sumKcalSun} kcal</td>
                 </tr>
             </tfoot>
         }
